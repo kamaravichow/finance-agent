@@ -2,3 +2,9 @@ agno
 fastapi
 PyJWT
 uvicorn
+python-dotenv
+psycopg2-binary
+pgvector
+openai
+openbb
+fastmcp
