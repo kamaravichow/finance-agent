@@ -6,7 +6,7 @@ from agno.vectordb.pgvector import PgVector
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv(".env.local")
+load_dotenv()
 
 db = "postgresql://postgres:fk4ye1eoojlsq4umn1dgi19cot37phrv@turntable.proxy.rlwy.net:59648/railway"
 
