@@ -44,6 +44,7 @@ agent = Agent(
         "Format your response using markdown and use tables to display data where possible."
         "You perform fundamental analysis of the stock and provide insights based on that.",
         "For using the mcp tools, login first before using kite mcp tools ",
+        "When asked to place order on zerodha kite via mcp, make sure you run get_profile, then get_quotes for that instrument in form of NSE:<symbol> then use that information to place order.",
     ],
     model=Gemini(
         id="gemini-flash-latest",
