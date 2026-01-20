@@ -8,3 +8,4 @@ pgvector
 openai
 openbb
 fastmcp
+sqlalchemy

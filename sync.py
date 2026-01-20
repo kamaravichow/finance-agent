@@ -20,7 +20,6 @@ knowledge = Knowledge(
 
 
 # ./knowledge/** all the markdown files under this directory
-
 for file in Path("./knowledge").glob("**/*.md"):
     print("Processing file: ", file)
     knowledge.add_content(
