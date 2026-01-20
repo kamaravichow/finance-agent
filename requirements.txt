@@ -9,3 +9,4 @@ openai
 openbb
 fastmcp
 sqlalchemy
+google-genai
