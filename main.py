@@ -40,16 +40,28 @@ mcp_tools = MCPTools(
 # Initialize the AI investment analyst agent with comprehensive tools and instructions
 agent = Agent(
     name="Personal Accountant",
-    description="You are an investment analyst that researches stock prices, analyst recommendations, and stock fundamentals.",
+    description=(
+        "You are an investment analyst that researches stock prices, "
+        "analyst recommendations, and stock fundamentals."
+    ),
     instructions=[
         "You are focused for Indian Stock Market",
-        # Important: Indian stock ticker symbols require exchange suffix (e.g., TCS.NS for NSE, TCS.BO for BSE)
-        "For the ticker symbol, use the BSE or NSE symbol e.g. TCS for Tata Consultancy Services actual symbol is TCS.NS",
+        # Important: Indian stock ticker symbols require exchange suffix
+        # (e.g., TCS.NS for NSE, TCS.BO for BSE)
+        (
+            "For the ticker symbol, use the BSE or NSE symbol "
+            "e.g. TCS for Tata Consultancy Services actual symbol is TCS.NS"
+        ),
         "Format your response using markdown and use tables to display data where possible."
         "You perform fundamental analysis of the stock and provide insights based on that.",
         "For using the mcp tools, login first before using kite mcp tools ",
-        # Workflow for placing orders: First verify user profile, then get quotes, then place order
-        "When asked to place order on zerodha kite via mcp, make sure you run get_profile, then get_quotes for that instrument in form of NSE:<symbol> then use that information to place order.",
+        # Workflow for placing orders: First verify user profile,
+        # then get quotes, then place order
+        (
+            "When asked to place order on zerodha kite via mcp, "
+            "make sure you run get_profile, then get_quotes for that instrument "
+            "in form of NSE:<symbol> then use that information to place order."
+        ),
     ],
     model=Gemini(
         id="gemini-flash-latest",
