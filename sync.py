@@ -10,7 +10,13 @@ import os
 load_dotenv()
 
 # Load PostgreSQL database URL from environment variables for security
-db = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/dbname")
+# Fail explicitly if DATABASE_URL is not set to prevent accidental use of defaults
+db = os.getenv("DATABASE_URL")
+if not db:
+    raise ValueError(
+        "DATABASE_URL environment variable is not set. "
+        "Please configure your .env file based on .env.example"
+    )
 
 # Initialize knowledge base with vector database
 knowledge = Knowledge(

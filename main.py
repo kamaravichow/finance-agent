@@ -12,13 +12,18 @@ from agno.vectordb.pgvector import PgVector
 from agno.tools.mcp import MCPTools
 
 import os
+from dotenv import load_dotenv
 
-import dotenv
-
-dotenv.load_dotenv()
+load_dotenv()
 
 # Load PostgreSQL database URL from environment variables for security
-db = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/dbname")
+# Fail explicitly if DATABASE_URL is not set to prevent accidental use of defaults
+db = os.getenv("DATABASE_URL")
+if not db:
+    raise ValueError(
+        "DATABASE_URL environment variable is not set. "
+        "Please configure your .env file based on .env.example"
+    )
 
 # Initialize knowledge base with vector database for RAG (Retrieval Augmented Generation)
 # This stores and retrieves relevant investment lessons and strategies from markdown documents
@@ -52,8 +57,10 @@ agent = Agent(
             "For the ticker symbol, use the BSE or NSE symbol "
             "e.g. TCS for Tata Consultancy Services actual symbol is TCS.NS"
         ),
-        "Format your response using markdown and use tables to display data where possible."
-        "You perform fundamental analysis of the stock and provide insights based on that.",
+        (
+            "Format your response using markdown and use tables to display data where possible. "
+            "You perform fundamental analysis of the stock and provide insights based on that."
+        ),
         "For using the mcp tools, login first before using kite mcp tools ",
         # Workflow for placing orders: First verify user profile,
         # then get quotes, then place order
