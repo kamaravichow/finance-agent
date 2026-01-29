@@ -1,11 +1,13 @@
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
 from agno.agent import Agent
 from agno.knowledge.knowledge import Knowledge
 from agno.knowledge.embedder.google import GeminiEmbedder
 from agno.knowledge.reader.markdown_reader import MarkdownReader
 from agno.vectordb.pgvector import PgVector
-from pathlib import Path
-from dotenv import load_dotenv
-import os
 
 load_dotenv()
 

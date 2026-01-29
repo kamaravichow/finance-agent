@@ -1,18 +1,18 @@
+import os
+
+from dotenv import load_dotenv
+
 from agno.os import AgentOS
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
 from agno.tools.reasoning import ReasoningTools
 from agno.tools.yfinance import YFinanceTools
 from agno.tools.webtools import WebTools
-
 from agno.models.google import Gemini
 from agno.knowledge.knowledge import Knowledge
 from agno.knowledge.embedder.google import GeminiEmbedder
 from agno.vectordb.pgvector import PgVector
 from agno.tools.mcp import MCPTools
-
-import os
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -50,24 +50,26 @@ agent = Agent(
         "analyst recommendations, and stock fundamentals."
     ),
     instructions=[
-        "You are focused for Indian Stock Market",
-        # Important: Indian stock ticker symbols require exchange suffix
-        # (e.g., TCS.NS for NSE, TCS.BO for BSE)
+        "You are focused on the Indian Stock Market.",
+        # Important: Use full ticker format with exchange suffix
+        # NSE symbols: SYMBOL.NS (e.g., TCS.NS, RELIANCE.NS)
+        # BSE symbols: SYMBOL.BO (e.g., TCS.BO)
         (
-            "For the ticker symbol, use the BSE or NSE symbol "
-            "e.g. TCS for Tata Consultancy Services actual symbol is TCS.NS"
+            "For ticker symbols, always use the complete format with exchange suffix. "
+            "For NSE, use SYMBOL.NS (e.g., TCS.NS for Tata Consultancy Services). "
+            "For BSE, use SYMBOL.BO."
         ),
         (
             "Format your response using markdown and use tables to display data where possible. "
             "You perform fundamental analysis of the stock and provide insights based on that."
         ),
-        "For using the mcp tools, login first before using kite mcp tools ",
+        "For using the MCP tools, login first before using Kite MCP tools.",
         # Workflow for placing orders: First verify user profile,
         # then get quotes, then place order
         (
-            "When asked to place order on zerodha kite via mcp, "
+            "When asked to place an order on Zerodha Kite via MCP, "
             "make sure you run get_profile, then get_quotes for that instrument "
-            "in form of NSE:<symbol> then use that information to place order."
+            "in the form NSE:<symbol>, then use that information to place the order."
         ),
     ],
     model=Gemini(
