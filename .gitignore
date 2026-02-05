@@ -221,7 +221,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
-.env.local
-.env
-.env.local
